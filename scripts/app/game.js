@@ -3,23 +3,14 @@ function app_game_init(
   , dom
   ) {
   let cube;
+  let sprite;
 
 	function start(scene) {
     
-    const greenMaterial = new three.MeshBasicMaterial({
-      color: 0x00ff00
-    });
-    
     const fragShader = dom.getCodeById("fragShader");
-    const shaderMaterial = new three.ShaderMaterial({
-      fragmentShader: fragShader
-    });
 
-    const box = new three.BoxGeometry( 1, 1, 1 );
-    cube = new three.Mesh( box, greenMaterial );
-    
-    const plane = new three.PlaneGeometry(10, 10);
-    const sprite = new three.Mesh(plane, shaderMaterial);
+    cube = make_cube();
+    sprite = make_shaded_sprite(fragShader);
     
     scene.add(cube);
     scene.add(sprite);
@@ -31,6 +22,20 @@ function app_game_init(
 	function render(){
 		cube.rotation.y += 0.02;
 	};
+  
+  function make_cube() {
+    return new three.Mesh(
+      new three.BoxGeometry(1, 1, 1),
+      new three.MeshBasicMaterial({ color: 0x00ff00 })
+    );
+  }
+  
+  function make_shaded_sprite(shader) {
+    return new three.Mesh(
+      new three.PlaneGeometry(10, 10),
+      new three.ShaderMaterial({ fragmentShader: shader })
+    );
+  }
 	
 	return {
 	  start  : start
