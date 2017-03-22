@@ -5,4 +5,10 @@
     //Add it to the screen
     scene.add( cube );
     cube.position.z = -3;//Shift the cube back so we can see it
+    
+    function render() {
+        cube.rotation.y += 0.02;
+    };
+    
+    return render;
 }
