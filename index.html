@@ -7,11 +7,28 @@
 	</style>
 </heda>
 <body>
-  <script id="fragShader" type="shader-code">
+  <script id="shader_01_multicolor" type="shader-code">
   uniform vec2 resolution;
   void main() {
     vec2 uv = gl_FragCoord.xy / resolution.xy; 
     gl_FragColor = vec4(uv, 0.5, 1.0);
+  }
+  </script>
+
+  <script id="shader_02_four_squares" type="shader-code">
+  uniform vec2 resolution;
+  void main() {
+    vec2 uv = gl_FragCoord.xy / resolution.xy;
+
+    if (uv.x < 0.5 && uv.y < 0.5) {
+      gl_FragColor = vec4(uv, 0.5, 1.0);       // top right
+    } else if (uv.x < 0.5) {
+      gl_FragColor = vec4(1.0, 0.5, 0.5, 1.0); // bottom left
+    } else if (uv.y < 0.5) {
+      gl_FragColor = vec4(0.5, 1.0, 0.5, 1.0); // top left
+    } else {
+      gl_FragColor = vec4(0.5, 0.5, 1.0, 1.0); // bottom right
+    }
   }
   </script>
   

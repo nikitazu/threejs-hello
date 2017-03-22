@@ -17,7 +17,7 @@ function app_game_init(
       }
     };
     
-    const fragShader = dom.getCodeById("fragShader");
+    const fragShader = dom.getCodeById("shader_02_four_squares");
 
     cube = make_cube();
     sprite = make_shaded_sprite(fragShader, uniforms);
