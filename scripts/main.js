@@ -1,27 +1,36 @@
-﻿function main_init(exports) {
+﻿function main_init(
+    document
+  , window
+  , three
+  , dom
+  , game
+  ) {
+  
 	let scene;
 	let camera;
 	let renderer;
 
 	scene_setup();
-	const game = exports.app_game_init(exports);
   game.start(scene);
   render();
 	
 	function scene_setup() {
 		//This is all code needed to set up a basic ThreeJS scene
 		//First we initialize the scene and our camera
-		scene = new exports.three.Scene();
-		camera = new exports.three.PerspectiveCamera(
+		scene = new three.Scene();
+		camera = new three.PerspectiveCamera(
 			75
-		, exports.window.innerWidth / exports.window.innerHeight
+    , dom.getWindowAspectRatio()
 		, 0.1
 		, 1000
 		);
 		//We create the WebGL renderer and add it to the document
-		renderer = new THREE.WebGLRenderer();
-		renderer.setSize(exports.window.innerWidth, exports.window.innerHeight);
-		exports.document.body.appendChild(renderer.domElement);
+		renderer = new three.WebGLRenderer();
+		renderer.setSize(
+      dom.getWindowInnerWidth()
+    , dom.getWindowInnerHeight()
+    );
+    dom.documentAppend(renderer.domElement);
 	}
 	
 	function render() {

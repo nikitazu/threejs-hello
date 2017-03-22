@@ -7,22 +7,20 @@
 	</style>
 </heda>
 <body>
+  <script type="text/javascript" src="scripts/app/dom.js"></script>
   <script type="text/javascript" src="scripts/app/game.js"></script>
   <script type="text/javascript" src="scripts/main.js"></script>
 	<script>
-		const exports = {
-      // Dom
-      document      : document
-    , window        : window
-      
-      // Libs
-		, three         : THREE
-      
-      // App
-		, app_game_init : app_game_init
-		};
-
-    main_init(exports);
+    main_init(
+      document
+    , window
+    , THREE
+    , app_dom_init(
+        window
+      , document
+      )
+    , app_game_init(THREE)
+    );
 	</script>
 </body>
 </html>
