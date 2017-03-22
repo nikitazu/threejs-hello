@@ -7,10 +7,20 @@ function app_game_init(
 
 	function start(scene) {
     
+    const uniforms = {
+      resolution: {
+        type  : 'v2'
+      , value : new three.Vector2(
+          dom.getWindowInnerWidth()
+        , dom.getWindowInnerHeight()
+        )
+      }
+    };
+    
     const fragShader = dom.getCodeById("fragShader");
 
     cube = make_cube();
-    sprite = make_shaded_sprite(fragShader);
+    sprite = make_shaded_sprite(fragShader, uniforms);
     
     scene.add(cube);
     scene.add(sprite);
@@ -30,10 +40,13 @@ function app_game_init(
     );
   }
   
-  function make_shaded_sprite(shader) {
+  function make_shaded_sprite(shader, uniforms) {
     return new three.Mesh(
       new three.PlaneGeometry(10, 10),
-      new three.ShaderMaterial({ fragmentShader: shader })
+      new three.ShaderMaterial({
+        fragmentShader: shader
+      , uniforms: uniforms
+      })
     );
   }
 	
