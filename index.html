@@ -7,20 +7,31 @@
 	</style>
 </heda>
 <body>
+  <script id="fragShader" type="shader-code">
+  void main() {
+    gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+  }
+  </script>
+  
   <script type="text/javascript" src="scripts/app/dom.js"></script>
   <script type="text/javascript" src="scripts/app/game.js"></script>
   <script type="text/javascript" src="scripts/main.js"></script>
 	<script>
-    main_init(
-      document
-    , window
-    , THREE
-    , app_dom_init(
-        window
-      , document
-      )
-    , app_game_init(THREE)
-    );
+  const dom  = app_dom_init(
+    window
+  , document
+  );
+  
+  const game = app_game_init(
+    THREE
+  , dom
+  );
+  
+  main_init(
+    THREE
+  , dom
+  , game
+  );
 	</script>
 </body>
 </html>

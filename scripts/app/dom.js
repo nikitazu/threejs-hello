@@ -11,10 +11,15 @@ function app_dom_init(
     document.body.appendChild(element);  
   }
   
+  function getCodeById(id) {
+    return document.getElementById(id).innerHTML;
+  }
+  
   return {
     getWindowAspectRatio : getWindowAspectRatio
   , getWindowInnerWidth  : getWindowInnerWidth
   , getWindowInnerHeight : getWindowInnerHeight
   , documentAppend       : documentAppend
+  , getCodeById          : getCodeById
   };
 }

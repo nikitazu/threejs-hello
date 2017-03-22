@@ -1,7 +1,5 @@
 ﻿function main_init(
-    document
-  , window
-  , three
+    three
   , dom
   , game
   ) {

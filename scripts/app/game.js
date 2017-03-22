@@ -1,13 +1,31 @@
-function app_game_init(three) {
+function app_game_init(
+    three
+  , dom
+  ) {
   let cube;
 
 	function start(scene) {
-    const geometry = new three.BoxGeometry( 1, 1, 1 );
-    const material = new three.MeshBasicMaterial( { color: 0x00ff00} );//We make it green
-    cube = new three.Mesh( geometry, material );
-    //Add it to the screen
-    scene.add( cube );
-    cube.position.z = -3;//Shift the cube back so we can see it
+    
+    const greenMaterial = new three.MeshBasicMaterial({
+      color: 0x00ff00
+    });
+    
+    const fragShader = dom.getCodeById("fragShader");
+    const shaderMaterial = new three.ShaderMaterial({
+      fragmentShader: fragShader
+    });
+
+    const box = new three.BoxGeometry( 1, 1, 1 );
+    cube = new three.Mesh( box, greenMaterial );
+    
+    const plane = new three.PlaneGeometry(10, 10);
+    const sprite = new three.Mesh(plane, shaderMaterial);
+    
+    scene.add(cube);
+    scene.add(sprite);
+    
+    cube.position.z = -3;
+    sprite.position.z = -4;
 	}
 
 	function render(){
