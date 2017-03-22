@@ -4,10 +4,11 @@ function app_game_init(
   ) {
   let cube;
   let sprite;
+  let uniforms;
 
 	function start(scene) {
     
-    const uniforms = {
+    uniforms = {
       resolution: {
         type  : 'v2'
       , value : new three.Vector2(
@@ -30,7 +31,9 @@ function app_game_init(
 	}
 
 	function render(){
-		cube.rotation.y += 0.02;
+    cube.rotation.y += 0.02;
+    uniforms.resolution.value.x = dom.getWindowInnerWidth();
+    uniforms.resolution.value.y = dom.getWindowInnerHeight();
 	};
   
   function make_cube() {
