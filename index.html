@@ -15,6 +15,7 @@
   }
   </script>
 
+
   <script id="shader_02_four_squares" type="shader-code">
   uniform vec2 resolution;
   void main() {
@@ -31,6 +32,17 @@
     }
   }
   </script>
+
+
+  <script id="shader_03_time_change_color" type="shader-code">
+  uniform vec2  resolution;
+  uniform float sine;
+  void main() {
+    vec2 uv = gl_FragCoord.xy / resolution.xy; 
+    gl_FragColor = vec4(uv * sine * 0.5, 0.5, 1.0);
+  }
+  </script>
+  
   
   <script type="text/javascript" src="scripts/app/dom.js"></script>
   <script type="text/javascript" src="scripts/app/game.js"></script>
@@ -52,5 +64,22 @@
   , game
   );
 	</script>
+  
+  <!-- 
+  
+  Uniform      GLSL          JavaScript 
+  type string	 type          type
+  
+  'i', '1i'   = int         = Number
+  'f', '1f'   = float       = Number
+  'v2'        = vec2        = THREE.Vector2
+  'v3'        = vec3        = THREE.Vector3
+  'c'	        = vec3        = THREE.Color
+  'v4'	      = vec4        = THREE.Vector4
+  'm3'	      = mat3        = THREE.Matrix3
+  'm4'	      = mat4        = THREE.Matrix4
+  't'	        = sampler2D   = THREE.Texture
+  't'	        = samplerCube = THREE.CubeTexture
+  -->
 </body>
 </html>

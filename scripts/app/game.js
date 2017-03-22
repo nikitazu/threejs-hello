@@ -5,20 +5,25 @@ function app_game_init(
   let cube;
   let sprite;
   let uniforms;
+  let ticks = 1.0;
 
 	function start(scene) {
     
     uniforms = {
-      resolution: {
+      resolution : {
         type  : 'v2'
       , value : new three.Vector2(
           dom.getWindowInnerWidth()
         , dom.getWindowInnerHeight()
         )
       }
+    , sine : {
+        type  : 'f'
+      , value : 1.0
+      }
     };
     
-    const fragShader = dom.getCodeById("shader_02_four_squares");
+    const fragShader = dom.getCodeById("shader_03_time_change_color");
 
     cube = make_cube();
     sprite = make_shaded_sprite(fragShader, uniforms);
@@ -30,10 +35,13 @@ function app_game_init(
     sprite.position.z = -4;
 	}
 
-	function render(){
+	function render() {
+    ticks += 1;
+    
     cube.rotation.y += 0.02;
     uniforms.resolution.value.x = dom.getWindowInnerWidth();
     uniforms.resolution.value.y = dom.getWindowInnerHeight();
+    uniforms.sine.value = Math.abs(Math.sin(ticks * 0.01));
 	};
   
   function make_cube() {
