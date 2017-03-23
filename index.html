@@ -36,10 +36,11 @@
 
   <script id="shader_03_time_change_color" type="shader-code">
   uniform vec2  resolution;
-  uniform float sine;
+  uniform float ticks;
   void main() {
-    vec2 uv = gl_FragCoord.xy / resolution.xy; 
-    gl_FragColor = vec4(uv * sine * 0.5, 0.5, 1.0);
+    vec2 uv = gl_FragCoord.xy / resolution.xy;
+    float k = abs(sin(ticks * 0.03));
+    gl_FragColor = vec4(uv * k * 0.5, 0.5, 1.0);
   }
   </script>
   
@@ -66,6 +67,7 @@
   const game = app_game_init(
     THREE
   , dom
+  , "shader_03_time_change_color"
   );
   
   main_init(

@@ -1,6 +1,7 @@
 function app_game_init(
     three
   , dom
+  , shaderId
   ) {
   let cube;
   let sprite;
@@ -20,9 +21,9 @@ function app_game_init(
         , dom.getWindowInnerHeight()
         )
       }
-    , sine : {
+    , ticks : {
         type  : 'f'
-      , value : 1.0
+      , value : ticks
       }
       , texture : {
           type  : 't'
@@ -32,7 +33,7 @@ function app_game_init(
 
     load_texture("https://tutsplus.github.io/Beginners-Guide-to-Shaders/Part2/SIPI_Jelly_Beans.jpg");
     
-    const fragShader = dom.getCodeById("shader_04_texture");
+    const fragShader = dom.getCodeById(shaderId);
 
     cube = make_cube();
     sprite = make_shaded_sprite(fragShader, uniforms);
@@ -50,7 +51,7 @@ function app_game_init(
     cube.rotation.y += 0.02;
     uniforms.resolution.value.x = dom.getWindowInnerWidth();
     uniforms.resolution.value.y = dom.getWindowInnerHeight();
-    uniforms.sine.value = Math.abs(Math.sin(ticks * 0.01));
+    uniforms.ticks.value = ticks;
 	};
   
   function make_cube() {
