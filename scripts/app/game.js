@@ -8,7 +8,6 @@ function app_game_init(
   let uniforms;
 
   const textureLoader = new three.TextureLoader();
-  textureLoader.crossOrigin = '';
 
 	function start(scene) {
     
@@ -30,8 +29,8 @@ function app_game_init(
       }
     };
 
-    load_texture("https://tutsplus.github.io/Beginners-Guide-to-Shaders/Part2/SIPI_Jelly_Beans.jpg");
-    
+    load_texture("images/morevna512.png");
+
     const fragShader = dom.getCodeById(shaderId);
 
     cube = make_cube();

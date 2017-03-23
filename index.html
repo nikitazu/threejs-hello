@@ -55,6 +55,16 @@
   </script>
   
   
+  <script id="shader_05_texture_preserve_aspect_ratio" type="shader-code">
+  uniform vec2      resolution;
+  uniform sampler2D texture;
+  void main() {
+    vec2  uv = gl_FragCoord.xy / resolution.x; // image should be square
+    gl_FragColor = texture2D(texture, uv);
+  }
+  </script>
+  
+  
   <script type="text/javascript" src="scripts/app/dom.js"></script>
   <script type="text/javascript" src="scripts/app/game.js"></script>
   <script type="text/javascript" src="scripts/main.js"></script>
@@ -67,7 +77,7 @@
   const game = app_game_init(
     THREE
   , dom
-  , "shader_03_time_change_color"
+  , "shader_05_texture_preserve_aspect_ratio"
   );
   
   main_init(
