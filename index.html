@@ -76,7 +76,7 @@
     vec2  uv      = gl_FragCoord.xy / maxSide;
     vec2  lightuv = vec2(light.x, resolution.y - light.y) / maxSide;
     float dist    = distance(uv, lightuv);
-    float kl      = light.z / dist * (0.5 + abs(sin(ticks * 0.001)) * 0.5);
+    float kl      = light.z / dist * (0.5 + abs(sin(ticks * 0.001)) * 0.2);
     gl_FragColor  = texture2D(texture, uv) * kl;
   }
   </script>
