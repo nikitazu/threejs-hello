@@ -6,7 +6,6 @@ function app_game_init(
   let cube;
   let sprite;
   let uniforms;
-  let ticks = 1.0;
 
   const textureLoader = new three.TextureLoader();
   textureLoader.crossOrigin = '';
@@ -23,7 +22,7 @@ function app_game_init(
       }
     , ticks : {
         type  : 'f'
-      , value : ticks
+      , value : dom.getTicks()
       }
       , texture : {
           type  : 't'
@@ -46,12 +45,10 @@ function app_game_init(
 	}
 
 	function render() {
-    ticks += 1;
-    
     cube.rotation.y += 0.02;
     uniforms.resolution.value.x = dom.getWindowInnerWidth();
     uniforms.resolution.value.y = dom.getWindowInnerHeight();
-    uniforms.ticks.value = ticks;
+    uniforms.ticks.value = dom.getTicks();
 	};
   
   function make_cube() {

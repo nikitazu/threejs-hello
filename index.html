@@ -39,7 +39,7 @@
   uniform float ticks;
   void main() {
     vec2 uv = gl_FragCoord.xy / resolution.xy;
-    float k = abs(sin(ticks * 0.03));
+    float k = abs(sin(ticks * 0.005));
     gl_FragColor = vec4(uv * k * 0.5, 0.5, 1.0);
   }
   </script>

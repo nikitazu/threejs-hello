@@ -15,11 +15,16 @@ function app_dom_init(
     return document.getElementById(id).innerHTML;
   }
   
+  function getTicks() {
+    return performance.now();
+  }
+  
   return {
     getWindowAspectRatio : getWindowAspectRatio
   , getWindowInnerWidth  : getWindowInnerWidth
   , getWindowInnerHeight : getWindowInnerHeight
   , documentAppend       : documentAppend
   , getCodeById          : getCodeById
+  , getTicks             : getTicks
   };
 }
