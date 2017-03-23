@@ -7,6 +7,9 @@ function app_game_init(
   let uniforms;
   let ticks = 1.0;
 
+  const textureLoader = new three.TextureLoader();
+  textureLoader.crossOrigin = '';
+
 	function start(scene) {
     
     uniforms = {
@@ -21,9 +24,15 @@ function app_game_init(
         type  : 'f'
       , value : 1.0
       }
+      , texture : {
+          type  : 't'
+        , value : undefined
+      }
     };
+
+    load_texture("https://tutsplus.github.io/Beginners-Guide-to-Shaders/Part2/SIPI_Jelly_Beans.jpg");
     
-    const fragShader = dom.getCodeById("shader_03_time_change_color");
+    const fragShader = dom.getCodeById("shader_04_texture");
 
     cube = make_cube();
     sprite = make_shaded_sprite(fragShader, uniforms);
@@ -59,6 +68,13 @@ function app_game_init(
       , uniforms: uniforms
       })
     );
+  }
+  
+  function load_texture(url) {
+    const done = texture => uniforms.texture.value = texture;
+    const progress = xhr => console.log("txld: " + (xhr.loaded / xhr.total * 100) + "%");
+    const error = xhr => console.log("txld: error");
+    textureLoader.load(url, done, progress, error);
   }
 	
 	return {
