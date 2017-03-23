@@ -66,6 +66,22 @@
   </script>
   
   
+  <script id="shader_06_lighting" type="shader-code">
+  uniform vec2      resolution;
+  uniform sampler2D texture;
+  uniform vec3      light;
+  uniform float     ticks;
+  void main() {
+    float maxSide = resolution.x > resolution.y ? resolution.x : resolution.y;
+    vec2  uv      = gl_FragCoord.xy / maxSide;
+    vec2  lightuv = vec2(light.x, resolution.y - light.y) / maxSide;
+    float dist    = distance(uv, lightuv);
+    float kl      = light.z / dist * (0.5 + abs(sin(ticks * 0.001)) * 0.5);
+    gl_FragColor  = texture2D(texture, uv) * kl;
+  }
+  </script>
+  
+  
   <script type="text/javascript" src="scripts/app/dom.js"></script>
   <script type="text/javascript" src="scripts/app/game.js"></script>
   <script type="text/javascript" src="scripts/main.js"></script>
@@ -78,7 +94,7 @@
   const game = app_game_init(
     THREE
   , dom
-  , "shader_05_texture_preserve_aspect_ratio"
+  , "shader_06_lighting"
   );
   
   main_init(

@@ -19,6 +19,10 @@ function app_dom_init(
     return performance.now();
   }
   
+  function setOnMouseMove(f) {
+    document.onmousemove = f;
+  }
+  
   return {
     getWindowAspectRatio : getWindowAspectRatio
   , getWindowInnerWidth  : getWindowInnerWidth
@@ -26,5 +30,6 @@ function app_dom_init(
   , documentAppend       : documentAppend
   , getCodeById          : getCodeById
   , getTicks             : getTicks
+  , setOnMouseMove       : setOnMouseMove
   };
 }

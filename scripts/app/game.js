@@ -27,6 +27,10 @@ function app_game_init(
           type  : 't'
         , value : undefined
       }
+      , light : {
+          type  : 'v3'
+        , value : new three.Vector3(0.0, 0.0, 0.2)
+      }
     };
 
     load_texture("images/morevna512.png");
@@ -41,6 +45,11 @@ function app_game_init(
     
     cube.position.z = -3;
     sprite.position.z = -4;
+    
+    dom.setOnMouseMove(function (event) {
+      uniforms.light.value.x = event.clientX;
+      uniforms.light.value.y = event.clientY;
+    });
 	}
 
 	function render() {
