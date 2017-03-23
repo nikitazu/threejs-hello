@@ -66,7 +66,26 @@
   </script>
   
   
-  <script id="shader_06_lighting" type="shader-code">
+  <script id="shader_06_lighting_real" type="shader-code">
+  uniform vec2      resolution;
+  uniform sampler2D texture;
+  uniform vec3      light;
+  uniform float     ticks;
+  void main() {
+    float slowTicks   = ticks * 0.001;
+    float fluctuation = 0.5 + 0.2 * abs(sin(slowTicks)); // 0.5 .. 0.7
+    
+    float maxSide = resolution.x > resolution.y ? resolution.x : resolution.y;
+    vec2  uv      = gl_FragCoord.xy / maxSide;
+    vec2  lightuv = vec2(light.x, resolution.y - light.y) / maxSide;
+    float dist    = distance(uv, lightuv);
+    float kl      = (1.0 - dist / light.z * fluctuation);
+    gl_FragColor  = texture2D(texture, uv) * kl;
+  }
+  </script>
+  
+  
+  <script id="shader_07_lighting_fun" type="shader-code">
   uniform vec2      resolution;
   uniform sampler2D texture;
   uniform vec3      light;
@@ -97,7 +116,7 @@
   const game = app_game_init(
     THREE
   , dom
-  , "shader_06_lighting"
+  , "shader_07_lighting_fun"
   );
   
   main_init(

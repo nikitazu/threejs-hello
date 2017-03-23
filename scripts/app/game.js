@@ -29,7 +29,7 @@ function app_game_init(
       }
       , light : {
           type  : 'v3'
-        , value : new three.Vector3(0.0, 0.0, 0.2)
+        , value : new three.Vector3(0.0, 0.0, 0.3)
       }
     };
 
